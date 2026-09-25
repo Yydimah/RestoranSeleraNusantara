@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restoran Selera Nusantara</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fafaf8;
+            color: #2d2d2d;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 1px 20px rgba(0, 0, 0, 0.08);
+            padding: 12px 0;
+        }
+
+        .navbar .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .navbar .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .navbar.scrolled .logo {
+            color: #1a1a2e;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.3s;
+        }
+
+        .navbar.scrolled .nav-links a {
+            color: #444;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #c8956c;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #c8956c;
+        }
+
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #fff;
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .navbar.scrolled .menu-toggle span {
+            background: #333;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(200, 149, 108, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(200, 149, 108, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 24px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid rgba(200, 149, 108, 0.5);
+            color: #c8956c;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero h1 span {
+            color: #c8956c;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 500px;
+            margin: 0 auto 32px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: #c8956c;
+            color: #fff;
+            padding: 14px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .hero-btn:hover {
+            background: #b07d56;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(200, 149, 108, 0.35);
+        }
+
+        /* Decorative floating elements */
+        .hero-deco {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.06;
+            background: #c8956c;
+        }
+
+        .hero-deco:nth-child(1) { width: 300px; height: 300px; top: -100px; right: -50px; }
+        .hero-deco:nth-child(2) { width: 200px; height: 200px; bottom: -80px; left: -60px; }
+        .hero-deco:nth-child(3) { width: 120px; height: 120px; top: 40%; left: 10%; }
+
+        /* ===== SECTION GENERAL ===== */
+        .section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: #c8956c;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: #1a1a2e;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            color: #777;
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .section-divider {
+            width: 50px;
+            height: 3px;
+            background: #c8956c;
+            border-radius: 2px;
+            margin-bottom: 24px;
+        }
+
+        /* ===== PROFIL & ABOUT ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: #555;
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #c8956c;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .about-image-container {
+            position: relative;
+        }
+
+        .about-image-container .img-main {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #e8d5c4 0%, #d4baa0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .about-image-container::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #c8956c;
+            border-radius: 16px;
+            top: 16px;
+            left: 16px;
+            z-index: -1;
+        }
+
+        /* ===== MENU MAKANAN ===== */
+        .menu-section {
+            background: #f5f0eb;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .menu-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-card-media {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card video {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-card:hover video {
+            transform: scale(1.05);
+        }
+
+        .menu-card-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            color: #c8956c;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 50px;
+        }
+
+        .menu-card-body {
+            padding: 20px;
+        }
+
+        .menu-card-body h3 {
+            font-size: 1.15rem;
+            color: #1a1a2e;
+            margin-bottom: 6px;
+        }
+
+        .menu-card-body .desc {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .menu-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .menu-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #c8956c;
+        }
+
+        .menu-order-btn {
+            background: #1a1a2e;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .menu-order-btn:hover {
+            background: #c8956c;
+        }
+
+        /* ===== MENU MINUMAN ===== */
+        .drinks-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .drink-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 20px 24px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .drink-item:hover {
+            border-color: #c8956c;
+            box-shadow: 0 4px 16px rgba(200, 149, 108, 0.12);
+        }
+
+        .drink-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .drink-icon {
+            width: 44px;
+            height: 44px;
+            background: #f5f0eb;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .drink-name {
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .drink-price {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: #c8956c;
+            font-size: 1.1rem;
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery-section {
+            background: #1a1a2e;
+        }
+
+        .gallery-section .section-label {
+            color: #c8956c;
+        }
+
+        .gallery-section .section-title {
+            color: #fff;
+        }
+
+        .gallery-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 200px);
+            gap: 16px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-row: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        .gallery-item-label {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-item-label {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== LOKASI ===== */
+        .location-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .location-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #c8956c, #b07d56);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .location-details h3 {
+            font-size: 1.3rem;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+
+        .location-details p {
+            color: #777;
+            font-size: 0.95rem;
+        }
+
+        .location-details .hours {
+            display: inline-block;
+            margin-top: 12px;
+            background: #f5f0eb;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: #c8956c;
+            font-weight: 600;
+        }
+
+        /* ===== KONTAK ===== */
+        .contact-section {
+            background: #f5f0eb;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            color: #1a1a2e;
+            margin-bottom: 16px;
+        }
+
+        .contact-info p {
+            color: #777;
+            margin-bottom: 32px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .contact-item-icon {
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-item-text .label {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-item-text .value {
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-top: 2px;
+        }
+
+        .contact-form {
+            background: #fff;
+            padding: 36px;
+            border-radius: 16px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1.5px solid #e8e8e8;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #333;
+            transition: all 0.3s ease;
+            background: #fafaf8;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #c8956c;
+            box-shadow: 0 0 0 4px rgba(200, 149, 108, 0.1);
+            background: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 26, 46, 0.3);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #1a1a2e;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 48px 24px 24px;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-links h4 {
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #c8956c;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.85rem;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-image-container {
+                order: -1;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-row: span 1;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .location-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                padding: 12px 0;
+                box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                color: #333 !important;
+                padding: 14px 24px;
+                display: block;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#home" class="logo">Selera Nusantara</a>
+
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#about" onclick="closeMenu()">Tentang</a></li>
+                <li><a href="#menu" onclick="closeMenu()">Menu</a></li>
+                <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
+                <li><a href="#kontak" onclick="closeMenu()">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <div class="hero-deco"></div>
+        <div class="hero-deco"></div>
+        <div class="hero-deco"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">🍽️ Cita Rasa Autentik Indonesia</div>
+            <h1>Restoran <span>Selera<br>Nusantara</span></h1>
+            <p>Nikmati kelezatan masakan khas Indonesia dengan bahan berkualitas dan harga terjangkau.</p>
+            <a href="#menu" class="hero-btn">Lihat Menu Kami</a>
+        </div>
+    </section>
+
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section" id="about">
+        <div class="about-grid">
+            <div class="about-text">
+                <span class="section-label">Tentang Kami</span>
+                <h2 class="section-title">Perjalanan Rasa yang Menginspirasi</h2>
+                <div class="section-divider"></div>
+
+                <p>
+                    Restoran Selera Nusantara hadir untuk memperkenalkan berbagai
+                    macam kuliner khas Indonesia. Menu yang tersedia dibuat dengan
+                    cita rasa yang cocok untuk berbagai kalangan.
+                </p>
+                <p>
+                    Kami berusaha memberikan pelayanan terbaik kepada pelanggan
+                    serta menyediakan makanan dengan bahan yang berkualitas dan
+                    segar setiap harinya.
+                </p>
+
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Menu Pilihan</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5K+</div>
+                        <div class="stat-label">Pelanggan</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.8</div>
+                        <div class="stat-label">Rating</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-image-container">
+                <div class="img-main">🍛</div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== MENU MAKANAN ===== -->
+    <section class="menu-section" id="menu">
+        <div class="section" style="padding-top: 80px; padding-bottom: 80px;">
+            <span class="section-label">Spesial Kami</span>
+            <h2 class="section-title">Menu Makanan</h2>
+            <p class="section-subtitle">Dibuat dengan cinta dan bahan pilihan terbaik untuk memberikan pengalaman kuliner yang tak terlupakan.</p>
+
+            <div class="menu-grid">
+
+                <div class="menu-card fade-in">
+                    <div class="menu-card-media">
+                        <video controls poster="nasi goreng spesial.jpg">
+                            <source src="nasi goreng spesial.mp4" type="video/mp4">
+                        </video>
+                        <div class="menu-card-badge">⭐ Best Seller</div>
+                    </div>
+                    <div class="menu-card-body">
+                        <h3>Nasi Goreng Spesial</h3>
+                        <p class="desc">Nasi goreng dengan telur, ayam suwir, dan bumbu rahasia.</p>
+                        <div class="menu-card-footer">
+                            <span class="menu-price">Rp 25.000</span>
+                            <button class="menu-order-btn">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in">
+                    <div class="menu-card-media">
+                        <video controls poster="mie goreng jawa.jpg">
+                            <source src="mie goreng jawa.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="menu-card-body">
+                        <h3>Mie Goreng Jawa</h3>
+                        <p class="desc">Mie goreng khas Jawa dengan sayuran segar dan bumbu manis.</p>
+                        <div class="menu-card-footer">
+                            <span class="menu-price">Rp 22.000</span>
+                            <button class="menu-order-btn">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in">
+                    <div class="menu-card-media">
+                        <video controls poster="ayam bakar madu.jpg">
+                            <source src="ayam bakar madu.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="menu-card-body">
+                        <h3>Ayam Bakar Madu</h3>
+                        <p class="desc">Ayam bakar dengan olesan madu dan sambal kecap istimewa.</p>
+                        <div class="menu-card-footer">
+                            <span class="menu-price">Rp 30.000</span>
+                            <button class="menu-order-btn">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in">
+                    <div class="menu-card-media">
+                        <video controls poster="soto ayam.jpg">
+                            <source src="soto ayam.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="menu-card-body">
+                        <h3>Soto Ayam</h3>
+                        <p class="desc">Kuah kuning gurih dengan ayam suwir, bihun, dan telur.</p>
+                        <div class="menu-card-footer">
+                            <span class="menu-price">Rp 20.000</span>
+                            <button class="menu-order-btn">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card fade-in">
+                    <div class="menu-card-media">
+                        <video controls poster="gado gado.jpg">
+                            <source src="gado gado.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="menu-card-body">
+                        <h3>Gado-Gado</h3>
+                        <p class="desc">Sayuran segar dengan bumbu kacang khas dan kerupuk renyah.</p>
+                        <div class="menu-card-footer">
+                            <span class="menu-price">Rp 18.000</span>
+                            <button class="menu-order-btn">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- MENU MINUMAN -->
+            <div style="margin-top: 64px;">
+                <span class="section-label">Penyegar</span>
+                <h2 class="section-title">Menu Minuman</h2>
+                <p class="section-subtitle">Pilihan minuman segar untuk menemani hidangan Anda.</p>
+
+                <div class="drinks-list">
+                    <div class="drink-item fade-in">
+                        <div class="drink-info">
+                            <div class="drink-icon">🧊</div>
+                            <span class="drink-name">Es Teh Manis</span>
+                        </div>
+                        <span class="drink-price">Rp 7.000</span>
+                    </div>
+
+                    <div class="drink-item fade-in">
+                        <div class="drink-info">
+                            <div class="drink-icon">🍊</div>
+                            <span class="drink-name">Es Jeruk</span>
+                        </div>
+                        <span class="drink-price">Rp 10.000</span>
+                    </div>
+
+                    <div class="drink-item fade-in">
+                        <div class="drink-info">
+                            <div class="drink-icon">☕</div>
+                            <span class="drink-name">Kopi Susu</span>
+                        </div>
+                        <span class="drink-price">Rp 15.000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== GALLERY ===== -->
+    <section class="gallery-section" id="gallery">
+        <div class="section">
+            <span class="section-label">Galeri</span>
+            <h2 class="section-title">Sajian Terbaik Kami</h2>
+            <p class="section-subtitle">Setiap hidangan dibuat dengan penuh perhatian dan dedikasi.</p>
+
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in">
+                    <img src="nasi goreng spesial.jpg" alt="Nasi Goreng Spesial">
+                    <span class="gallery-item-label">Nasi Goreng Spesial</span>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="mie goreng jawa.jpg" alt="Mie Goreng Jawa">
+                    <span class="gallery-item-label">Mie Goreng Jawa</span>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="ayam bakar madu.jpg" alt="Ayam Bakar Madu">
+                    <span class="gallery-item-label">Ayam Bakar Madu</span>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="soto ayam.jpg" alt="Soto Ayam">
+                    <span class="gallery-item-label">Soto Ayam</span>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="gado gado.jpg" alt="Gado-Gado">
+                    <span class="gallery-item-label">Gado-Gado</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== LOKASI ===== -->
+    <section class="section">
+        <span class="section-label">Temukan Kami</span>
+        <h2 class="section-title">Lokasi Restoran</h2>
+        <p class="section-subtitle">Kami menunggu kedatangan Anda!</p>
+
+        <div class="location-card fade-in">
+            <div class="location-icon">📍</div>
+            <div class="location-details">
+                <h3>Jl. Merpati II No. 10</h3>
+                <p>Tangerang Selatan, Banten, Indonesia</p>
+                <span class="hours">🕐 Buka setiap hari: 10.00 – 22.00 WIB</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== KONTAK ===== -->
+    <section class="contact-section" id="kontak">
+        <div class="section">
+            <div class="contact-grid">
+
+                <div class="contact-info">
+                    <span class="section-label">Hubungi Kami</span>
+                    <h3>Punya Pertanyaan?<br>Jangan Ragu untuk Menghubungi.</h3>
+                    <p>Kami siap membantu Anda untuk reservasi, pemesanan, atau informasi lainnya.</p>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon">📞</div>
+                        <div class="contact-item-text">
+                            <div class="label">Telepon</div>
+                            <div class="value">0812-3456-7890</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon">✉️</div>
+                        <div class="contact-item-text">
+                            <div class="label">Email</div>
+                            <div class="value">restoran@seleranusantara.com</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon">📍</div>
+                        <div class="contact-item-text">
+                            <div class="label">Alamat</div>
+                            <div class="value">Jl. Merpati II No. 10, Tangerang Selatan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Pesan berhasil dikirim! Terima kasih.');">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" placeholder="Masukkan nama lengkap Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Masukkan email Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Pesan</label>
+                        <textarea id="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Kirim Pesan →</button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h3>Selera Nusantara</h3>
+                <p>Menyajikan kelezatan kuliner khas Indonesia dengan bahan berkualitas dan harga terjangkau sejak tahun 2020.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Navigasi</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">Tentang</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#kontak">Kontak</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Jam Operasional</h4>
+                <ul>
+                    <li><a href="#">Senin – Jumat: 10.00 – 22.00</a></li>
+                    <li><a href="#">Sabtu – Minggu: 09.00 – 23.00</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Restoran Selera Nusantara. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        // Scroll reveal animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
