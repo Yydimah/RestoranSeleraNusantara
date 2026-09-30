@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restoran Selera Nusantara</title>
+    <title>Restoran Selera Nusantara - Cita Rasa Autentik Indonesia</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* ===== RESET & BASE ===== */
@@ -34,6 +34,127 @@
             font-family: 'Playfair Display', serif;
         }
 
+        /* ===== GENERAL TABLE STYLES ===== */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        /* Layout Table: Digunakan murni untuk mengelola tata letak/posisi */
+        .layout-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: none;
+            background: transparent;
+        }
+
+        .layout-table td, 
+        .layout-table th {
+            vertical-align: top;
+            border: none;
+            padding: 0;
+        }
+
+        /* Responsive wrapper untuk tabel data/promosi agar tidak overflow di layar kecil */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0;
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            background: #fff;
+        }
+
+        /* Data Tables Styling (Promo, Menu, & Jadwal) */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .data-table th {
+            background: #1a1a2e;
+            color: #f5f0eb;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            padding: 16px 20px;
+            font-weight: 600;
+            border-bottom: 3px solid #c8956c;
+            white-space: nowrap;
+        }
+
+        .data-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+            color: #444;
+        }
+
+        .data-table tbody tr {
+            transition: background 0.3s ease;
+        }
+
+        .data-table tbody tr:hover {
+            background: #fdfaf6;
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Tag / Badge */
+        .badge-promo {
+            display: inline-block;
+            background: #e74c3c;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-discount {
+            display: inline-block;
+            background: #27ae60;
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .badge-code {
+            display: inline-block;
+            background: #f5f0eb;
+            color: #c8956c;
+            border: 1px dashed #c8956c;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.85rem;
+            display: block;
+        }
+
+        .price-new {
+            color: #c8956c;
+            font-weight: 700;
+            font-size: 1.15rem;
+            font-family: 'Playfair Display', serif;
+        }
+
         /* ===== NAVBAR ===== */
         .navbar {
             position: fixed;
@@ -47,45 +168,61 @@
         }
 
         .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.94);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             box-shadow: 0 1px 20px rgba(0, 0, 0, 0.08);
             padding: 12px 0;
         }
 
-        .navbar .nav-inner {
+        .nav-inner {
             max-width: 1100px;
             margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             padding: 0 24px;
+        }
+
+        .navbar-layout-table {
+            width: 100%;
+        }
+
+        .navbar-layout-table td {
+            vertical-align: middle;
+        }
+
+        .nav-logo-cell {
+            width: 250px;
         }
 
         .navbar .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: #fff;
             text-decoration: none;
             transition: color 0.3s;
+            display: inline-block;
         }
 
         .navbar.scrolled .logo {
             color: #1a1a2e;
         }
 
+        .nav-links-cell {
+            text-align: right;
+        }
+
         .nav-links {
-            display: flex;
-            gap: 32px;
+            display: inline-flex;
+            gap: 28px;
             list-style: none;
+            margin: 0;
+            padding: 0;
         }
 
         .nav-links a {
             color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 500;
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -118,8 +255,13 @@
         }
 
         /* Mobile menu toggle */
-        .menu-toggle {
+        .nav-toggle-cell {
             display: none;
+            width: 40px;
+            text-align: right;
+        }
+
+        .menu-toggle {
             background: none;
             border: none;
             cursor: pointer;
@@ -150,6 +292,7 @@
             text-align: center;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
             overflow: hidden;
+            padding: 100px 24px 60px;
         }
 
         .hero::before {
@@ -157,14 +300,15 @@
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(circle at 20% 80%, rgba(200, 149, 108, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(200, 149, 108, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(200, 149, 108, 0.18) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(200, 149, 108, 0.12) 0%, transparent 50%);
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
-            padding: 0 24px;
+            max-width: 850px;
+            margin: 0 auto;
         }
 
         .hero-badge {
@@ -194,30 +338,87 @@
 
         .hero p {
             font-size: 1.15rem;
-            color: rgba(255, 255, 255, 0.7);
-            max-width: 500px;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 580px;
             margin: 0 auto 32px;
             animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-actions-table {
+            margin: 0 auto 40px;
+            width: auto;
+        }
+
+        .hero-actions-table td {
+            padding: 0 10px;
+            vertical-align: middle;
         }
 
         .hero-btn {
             display: inline-block;
             background: #c8956c;
             color: #fff;
-            padding: 14px 40px;
+            padding: 14px 36px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.95rem;
             letter-spacing: 1px;
             transition: all 0.3s ease;
-            animation: fadeInUp 0.8s ease 0.6s both;
+            box-shadow: 0 6px 20px rgba(200, 149, 108, 0.3);
         }
 
         .hero-btn:hover {
             background: #b07d56;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(200, 149, 108, 0.35);
+            box-shadow: 0 10px 25px rgba(200, 149, 108, 0.45);
+        }
+
+        .hero-btn-outline {
+            display: inline-block;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            padding: 13px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .hero-btn-outline:hover {
+            border-color: #c8956c;
+            color: #c8956c;
+            background: rgba(200, 149, 108, 0.1);
+        }
+
+        /* Hero Highlights Table */
+        .hero-highlights-table {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+        }
+
+        .hero-highlights-table td {
+            padding: 16px 20px;
+            text-align: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.9rem;
+        }
+
+        .hero-highlights-table td:last-child {
+            border-right: none;
+        }
+
+        .hero-highlights-table .hl-icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
         }
 
         /* Decorative floating elements */
@@ -258,8 +459,8 @@
         .section-subtitle {
             color: #777;
             font-size: 1.05rem;
-            max-width: 600px;
-            margin-bottom: 40px;
+            max-width: 650px;
+            margin-bottom: 36px;
         }
 
         .section-divider {
@@ -270,12 +471,20 @@
             margin-bottom: 24px;
         }
 
-        /* ===== PROFIL & ABOUT ===== */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
+        /* ===== PROFIL & ABOUT (TABLE LAYOUT) ===== */
+        .about-layout-table {
+            width: 100%;
+        }
+
+        .about-col-text {
+            width: 56%;
+            padding-right: 48px !important;
+            vertical-align: middle !important;
+        }
+
+        .about-col-image {
+            width: 44%;
+            vertical-align: middle !important;
         }
 
         .about-text p {
@@ -284,30 +493,40 @@
             font-size: 1rem;
         }
 
-        .about-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 32px;
+        /* Stats Table di dalam About */
+        .stats-table {
+            width: 100%;
+            margin-top: 28px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            border: 1px solid #eee;
         }
 
-        .stat-item {
+        .stat-item-cell {
             text-align: center;
+            padding: 18px 12px;
+            border-right: 1px solid #f0f0f0;
+        }
+
+        .stat-item-cell:last-child {
+            border-right: none;
         }
 
         .stat-number {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 2.1rem;
             font-weight: 700;
             color: #c8956c;
+            line-height: 1.1;
         }
 
         .stat-label {
-            font-size: 0.8rem;
-            color: #999;
+            font-size: 0.78rem;
+            color: #888;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
         .about-image-container {
@@ -323,7 +542,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
+            font-size: 4.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
         }
 
         .about-image-container::after {
@@ -338,15 +558,131 @@
             z-index: -1;
         }
 
-        /* ===== MENU MAKANAN ===== */
+        /* ===== PROMO SECTION (PENAMBAHAN KONTEN PROMOSI DENGAN TABEL) ===== */
+        .promo-section {
+            background: #fff;
+            position: relative;
+        }
+
+        .promo-box-header {
+            margin-bottom: 24px;
+        }
+
+        .promo-table th {
+            background: #1a1a2e;
+        }
+
+        .promo-name {
+            font-weight: 700;
+            color: #1a1a2e;
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+        }
+
+        .promo-desc {
+            font-size: 0.85rem;
+            color: #777;
+            line-height: 1.5;
+        }
+
+        .promo-table td {
+            vertical-align: middle;
+        }
+
+        .btn-order-promo {
+            background: #c8956c;
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-order-promo:hover {
+            background: #1a1a2e;
+            transform: translateY(-2px);
+        }
+
+        .promo-tfoot td {
+            background: #fdfaf6;
+            color: #888;
+            font-size: 0.85rem;
+            font-style: italic;
+            border-top: 2px solid #f0e6dc;
+            padding: 12px 20px;
+        }
+
+        /* Table 2 Kolom untuk Jadwal Promo Harian & Loyalty Club */
+        .promo-split-table {
+            width: 100%;
+            margin-top: 36px;
+        }
+
+        .promo-split-col-left {
+            width: 50%;
+            padding-right: 16px !important;
+        }
+
+        .promo-split-col-right {
+            width: 50%;
+            padding-left: 16px !important;
+        }
+
+        .mini-promo-card {
+            background: #fafaf8;
+            border: 1px solid #ebe5df;
+            border-radius: 12px;
+            padding: 20px;
+            height: 100%;
+        }
+
+        .mini-promo-card h4 {
+            font-size: 1.15rem;
+            color: #1a1a2e;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .inner-data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        .inner-data-table th {
+            background: #2a2a40;
+            color: #fff;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+        }
+
+        .inner-data-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        /* ===== MENU MAKANAN (TABLE LAYOUT) ===== */
         .menu-section {
             background: #f5f0eb;
         }
 
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+        /* Tabel layout untuk kartu makanan 3 kolom */
+        .menu-layout-table {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .menu-layout-table td {
+            width: 33.333%;
+            padding: 12px !important;
         }
 
         .menu-card {
@@ -355,6 +691,9 @@
             overflow: hidden;
             transition: all 0.4s ease;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .menu-card:hover {
@@ -394,6 +733,10 @@
 
         .menu-card-body {
             padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .menu-card-body h3 {
@@ -404,19 +747,23 @@
 
         .menu-card-body .desc {
             font-size: 0.85rem;
-            color: #999;
-            margin-bottom: 12px;
+            color: #777;
+            margin-bottom: 16px;
         }
 
-        .menu-card-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        /* Layout Table di dalam Footer Kartu Menu */
+        .card-footer-table {
+            width: 100%;
+        }
+
+        .card-footer-table td {
+            padding: 0 !important;
+            vertical-align: middle !important;
         }
 
         .menu-price {
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: #c8956c;
         }
@@ -437,19 +784,40 @@
             background: #c8956c;
         }
 
-        /* ===== MENU MINUMAN ===== */
-        .drinks-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
+        /* ===== TABEL DAFTAR MENU LENGKAP & HARGA ===== */
+        .menu-catalog-table {
+            width: 100%;
+            margin-top: 24px;
+        }
+
+        .menu-catalog-table th {
+            background: #16213e;
+        }
+
+        .badge-category {
+            display: inline-block;
+            background: #f0e6dc;
+            color: #8c603b;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* ===== MENU MINUMAN (TABLE LAYOUT) ===== */
+        .drinks-layout-table {
+            width: 100%;
+            margin-top: 16px;
+        }
+
+        .drinks-layout-table td {
+            width: 33.333%;
+            padding: 10px !important;
         }
 
         .drink-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             background: #fff;
-            padding: 20px 24px;
+            padding: 18px 20px;
             border-radius: 12px;
             border: 1px solid #eee;
             transition: all 0.3s ease;
@@ -460,10 +828,17 @@
             box-shadow: 0 4px 16px rgba(200, 149, 108, 0.12);
         }
 
-        .drink-info {
-            display: flex;
-            align-items: center;
-            gap: 14px;
+        .drink-item-table {
+            width: 100%;
+        }
+
+        .drink-item-table td {
+            padding: 0 !important;
+            vertical-align: middle !important;
+        }
+
+        .drink-icon-cell {
+            width: 52px;
         }
 
         .drink-icon {
@@ -480,6 +855,7 @@
         .drink-name {
             font-weight: 600;
             color: #1a1a2e;
+            font-size: 0.95rem;
         }
 
         .drink-price {
@@ -487,9 +863,11 @@
             font-weight: 700;
             color: #c8956c;
             font-size: 1.1rem;
+            text-align: right;
+            width: 90px;
         }
 
-        /* ===== GALLERY ===== */
+        /* ===== GALLERY SECTION (TABLE LAYOUT DENGAN ROWSPAN) ===== */
         .gallery-section {
             background: #1a1a2e;
         }
@@ -506,28 +884,43 @@
             color: rgba(255, 255, 255, 0.5);
         }
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(2, 200px);
-            gap: 16px;
+        /* Gallery Layout Table dengan Colspan & Rowspan */
+        .gallery-table-layout {
+            width: 100%;
+            border-spacing: 16px;
+            border-collapse: separate;
+        }
+
+        .gallery-table-layout td {
+            vertical-align: top;
+            padding: 0 !important;
+        }
+
+        .gallery-cell-featured {
+            width: 40%;
+            height: 432px;
+        }
+
+        .gallery-cell-regular {
+            width: 30%;
+            height: 200px;
         }
 
         .gallery-item {
             position: relative;
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
             cursor: pointer;
-        }
-
-        .gallery-item:nth-child(1) {
-            grid-row: span 2;
+            width: 100%;
+            height: 100%;
+            background: #252542;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
             transition: transform 0.5s ease;
         }
 
@@ -539,7 +932,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+            background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 60%);
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -552,6 +945,7 @@
             position: absolute;
             bottom: 16px;
             left: 16px;
+            right: 16px;
             color: #fff;
             font-weight: 600;
             font-size: 0.9rem;
@@ -566,15 +960,26 @@
             transform: translateY(0);
         }
 
-        /* ===== LOKASI ===== */
+        /* ===== LOKASI (TABLE LAYOUT) ===== */
         .location-card {
             background: #fff;
             border-radius: 16px;
-            padding: 40px;
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            padding: 36px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+        }
+
+        .location-table {
+            width: 100%;
+        }
+
+        .location-table td {
+            vertical-align: middle;
+            padding: 0 !important;
+        }
+
+        .location-icon-cell {
+            width: 96px;
         }
 
         .location-icon {
@@ -585,14 +990,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            flex-shrink: 0;
+            font-size: 2.2rem;
+        }
+
+        .location-details-cell {
+            padding-left: 20px !important;
         }
 
         .location-details h3 {
             font-size: 1.3rem;
             color: #1a1a2e;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .location-details p {
@@ -602,42 +1010,84 @@
 
         .location-details .hours {
             display: inline-block;
-            margin-top: 12px;
+            margin-top: 10px;
             background: #f5f0eb;
             padding: 6px 16px;
             border-radius: 50px;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             color: #c8956c;
             font-weight: 600;
         }
 
-        /* ===== KONTAK ===== */
+        .location-action-cell {
+            text-align: right;
+            width: 220px;
+        }
+
+        .btn-maps {
+            display: inline-block;
+            background: #1a1a2e;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-maps:hover {
+            background: #c8956c;
+            transform: translateY(-2px);
+        }
+
+        /* ===== KONTAK (TABLE LAYOUT) ===== */
         .contact-section {
             background: #f5f0eb;
         }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
+        .contact-layout-table {
+            width: 100%;
+        }
+
+        .contact-col-info {
+            width: 48%;
+            padding-right: 40px !important;
+            vertical-align: top;
+        }
+
+        .contact-col-form {
+            width: 52%;
+            vertical-align: top;
         }
 
         .contact-info h3 {
             font-size: 1.5rem;
             color: #1a1a2e;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .contact-info p {
             color: #777;
-            margin-bottom: 32px;
+            margin-bottom: 30px;
         }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
+        /* Kontak Items Table */
+        .contact-items-table {
+            width: 100%;
+        }
+
+        .contact-items-table tr {
+            margin-bottom: 20px;
+        }
+
+        .contact-items-table td {
+            padding-bottom: 20px !important;
+            vertical-align: middle;
+        }
+
+        .contact-item-icon-cell {
+            width: 64px;
         }
 
         .contact-item-icon {
@@ -665,6 +1115,7 @@
             margin-top: 2px;
         }
 
+        /* Formulir dengan layout table */
         .contact-form {
             background: #fff;
             padding: 36px;
@@ -672,8 +1123,12 @@
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .form-layout-table {
+            width: 100%;
+        }
+
+        .form-layout-table td {
+            padding-bottom: 18px !important;
         }
 
         .form-group label {
@@ -685,9 +1140,10 @@
         }
 
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
-            padding: 14px 18px;
+            padding: 13px 18px;
             border: 1.5px solid #e8e8e8;
             border-radius: 10px;
             font-family: 'Inter', sans-serif;
@@ -698,7 +1154,8 @@
         }
 
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #c8956c;
             box-shadow: 0 0 0 4px rgba(200, 149, 108, 0.1);
@@ -707,7 +1164,7 @@
 
         .form-group textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 110px;
         }
 
         .submit-btn {
@@ -728,22 +1185,40 @@
         .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(26, 26, 46, 0.3);
+            background: linear-gradient(135deg, #c8956c, #b07d56);
         }
 
-        /* ===== FOOTER ===== */
+        /* ===== FOOTER (TABLE LAYOUT) ===== */
         .footer {
             background: #1a1a2e;
             color: rgba(255, 255, 255, 0.5);
-            padding: 48px 24px 24px;
+            padding: 56px 24px 28px;
         }
 
         .footer-inner {
             max-width: 1100px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 48px;
+        }
+
+        .footer-layout-table {
+            width: 100%;
             margin-bottom: 40px;
+        }
+
+        .footer-col-brand {
+            width: 45%;
+            padding-right: 48px !important;
+            vertical-align: top;
+        }
+
+        .footer-col-links {
+            width: 25%;
+            vertical-align: top;
+        }
+
+        .footer-col-hours {
+            width: 30%;
+            vertical-align: top;
         }
 
         .footer-brand h3 {
@@ -755,15 +1230,16 @@
         .footer-brand p {
             font-size: 0.9rem;
             line-height: 1.8;
+            color: rgba(255, 255, 255, 0.65);
         }
 
-        .footer-links h4 {
+        .footer h4 {
             color: #fff;
             font-family: 'Inter', sans-serif;
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .footer-links ul {
@@ -775,7 +1251,7 @@
         }
 
         .footer-links a {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.3s;
@@ -785,13 +1261,33 @@
             color: #c8956c;
         }
 
-        .footer-bottom {
-            max-width: 1100px;
-            margin: 0 auto;
-            text-align: center;
-            padding-top: 24px;
+        /* Hours Table di Footer */
+        .footer-hours-table {
+            width: 100%;
+            font-size: 0.88rem;
+        }
+
+        .footer-hours-table td {
+            padding: 4px 0 !important;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .footer-hours-table .day-col {
+            font-weight: 500;
+            color: #fff;
+            width: 110px;
+        }
+
+        .footer-bottom-table {
+            width: 100%;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 24px;
+        }
+
+        .footer-bottom-table td {
+            padding-top: 20px !important;
             font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.45);
         }
 
         /* ===== ANIMATIONS ===== */
@@ -817,60 +1313,112 @@
             transform: translateY(0);
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* ===== RESPONSIVE UNTUK TABLE LAYOUT & DEVICES ===== */
         @media (max-width: 900px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
+            /* Ubah layout table menjadi blok saat di layar tablet/mobile */
+            .about-layout-table tr, 
+            .about-layout-table td,
+            .contact-layout-table tr, 
+            .contact-layout-table td,
+            .footer-layout-table tr, 
+            .footer-layout-table td {
+                display: block;
+                width: 100% !important;
+                padding-right: 0 !important;
+                padding-left: 0 !important;
             }
 
-            .about-image-container {
-                order: -1;
-                max-width: 400px;
+            .about-col-image {
+                margin-top: 36px;
+                max-width: 380px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .contact-col-info {
+                margin-bottom: 40px;
+            }
+
+            .footer-col-brand,
+            .footer-col-links {
+                margin-bottom: 30px;
+            }
+
+            .promo-split-table tr,
+            .promo-split-table td {
+                display: block;
+                width: 100% !important;
+                padding-right: 0 !important;
+                padding-left: 0 !important;
+            }
+
+            .promo-split-col-left {
+                margin-bottom: 24px;
+            }
+
+            /* Responsive Gallery Table */
+            .gallery-table-layout,
+            .gallery-table-layout tbody,
+            .gallery-table-layout tr,
+            .gallery-table-layout td {
+                display: block;
+                width: 100% !important;
+                height: 220px !important;
+                margin-bottom: 16px;
+            }
+
+            .gallery-cell-featured {
+                height: 280px !important;
+            }
+
+            .location-table tr,
+            .location-table td {
+                display: block;
+                width: 100% !important;
+                text-align: center;
+                padding-left: 0 !important;
+            }
+
+            .location-icon-cell {
+                margin: 0 auto 16px;
+            }
+
+            .location-icon {
                 margin: 0 auto;
             }
 
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: auto;
-            }
-
-            .gallery-item:nth-child(1) {
-                grid-row: span 1;
-            }
-
-            .footer-inner {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-
-            .location-card {
-                flex-direction: column;
+            .location-action-cell {
+                margin-top: 20px;
                 text-align: center;
             }
         }
 
         @media (max-width: 768px) {
-            .nav-links {
+            .nav-toggle-cell {
+                display: table-cell;
+            }
+
+            .nav-links-cell {
                 display: none;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 width: 100%;
-                flex-direction: column;
-                gap: 0;
                 background: rgba(255, 255, 255, 0.98);
                 backdrop-filter: blur(20px);
                 padding: 12px 0;
                 box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+                text-align: left;
             }
 
-            .nav-links.active {
+            .nav-links-cell.active {
+                display: block;
+            }
+
+            .nav-links {
                 display: flex;
+                flex-direction: column;
+                gap: 0;
             }
 
             .nav-links a {
@@ -879,21 +1427,22 @@
                 display: block;
             }
 
-            .menu-toggle {
+            /* Card Menu & Minuman Table responsive stack */
+            .menu-layout-table tr, 
+            .menu-layout-table td,
+            .drinks-layout-table tr, 
+            .drinks-layout-table td {
                 display: block;
-            }
-
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
+                width: 100% !important;
+                padding: 8px 0 !important;
             }
 
             .section {
                 padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
             }
         }
     </style>
@@ -901,29 +1450,38 @@
 
 <body>
 
-    <!-- ===== NAVBAR ===== -->
+    <!-- ===== NAVBAR (TABLE LAYOUT) ===== -->
     <nav class="navbar" id="navbar">
         <div class="nav-inner">
-            <a href="#home" class="logo">Selera Nusantara</a>
-
-            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" onclick="closeMenu()">Home</a></li>
-                <li><a href="#about" onclick="closeMenu()">Tentang</a></li>
-                <li><a href="#menu" onclick="closeMenu()">Menu</a></li>
-                <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
-                <li><a href="#kontak" onclick="closeMenu()">Kontak</a></li>
-            </ul>
+            <table class="layout-table navbar-layout-table" role="presentation">
+                <tr>
+                    <td class="nav-logo-cell">
+                        <a href="#home" class="logo">Selera Nusantara</a>
+                    </td>
+                    <td class="nav-links-cell" id="navLinksCell">
+                        <ul class="nav-links" id="navLinks">
+                            <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                            <li><a href="#about" onclick="closeMenu()">Tentang</a></li>
+                            <li><a href="#promo" onclick="closeMenu()">Promo Spesial</a></li>
+                            <li><a href="#menu" onclick="closeMenu()">Menu</a></li>
+                            <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
+                            <li><a href="#kontak" onclick="closeMenu()">Kontak</a></li>
+                        </ul>
+                    </td>
+                    <td class="nav-toggle-cell">
+                        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
         </div>
     </nav>
 
 
-    <!-- ===== HERO ===== -->
+    <!-- ===== HERO SECTION (WITH HIGHLIGHTS TABLE) ===== -->
     <section class="hero" id="home">
         <div class="hero-deco"></div>
         <div class="hero-deco"></div>
@@ -932,319 +1490,911 @@
         <div class="hero-content">
             <div class="hero-badge">🍽️ Cita Rasa Autentik Indonesia</div>
             <h1>Restoran <span>Selera<br>Nusantara</span></h1>
-            <p>Nikmati kelezatan masakan khas Indonesia dengan bahan berkualitas dan harga terjangkau.</p>
-            <a href="#menu" class="hero-btn">Lihat Menu Kami</a>
+            <p>Nikmati kelezatan masakan khas Indonesia dengan bahan berkualitas tinggi, bumbu rempah pilihan, dan harga bersahabat.</p>
+            
+            <table class="layout-table hero-actions-table" role="presentation">
+                <tr>
+                    <td><a href="#promo" class="hero-btn">Lihat Promo Spesial</a></td>
+                    <td><a href="#menu" class="hero-btn-outline">Daftar Menu</a></td>
+                </tr>
+            </table>
+
+            <!-- Tabel Keunggulan Restoran di Hero -->
+            <table class="hero-highlights-table">
+                <tr>
+                    <td>
+                        <span class="hl-icon">🥘</span>
+                        <strong>100% Rempah Asli</strong>
+                        <div style="font-size: 0.78rem; opacity: 0.8;">Resep warisan leluhur</div>
+                    </td>
+                    <td>
+                        <span class="hl-icon">🌱</span>
+                        <strong>Bahan Segar Pilihan</strong>
+                        <div style="font-size: 0.78rem; opacity: 0.8;">Dipasok segar setiap hari</div>
+                    </td>
+                    <td>
+                        <span class="hl-icon">⭐</span>
+                        <strong>Pelayanan Prima</strong>
+                        <div style="font-size: 0.78rem; opacity: 0.8;">Ramah, cepat & higienis</div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </section>
 
 
-    <!-- ===== ABOUT ===== -->
+    <!-- ===== ABOUT (TABLE LAYOUT) ===== -->
     <section class="section" id="about">
-        <div class="about-grid">
-            <div class="about-text">
-                <span class="section-label">Tentang Kami</span>
-                <h2 class="section-title">Perjalanan Rasa yang Menginspirasi</h2>
-                <div class="section-divider"></div>
+        <table class="layout-table about-layout-table" role="presentation">
+            <tr>
+                <td class="about-col-text">
+                    <div class="about-text">
+                        <span class="section-label">Tentang Kami</span>
+                        <h2 class="section-title">Perjalanan Rasa yang Menginspirasi</h2>
+                        <div class="section-divider"></div>
 
-                <p>
-                    Restoran Selera Nusantara hadir untuk memperkenalkan berbagai
-                    macam kuliner khas Indonesia. Menu yang tersedia dibuat dengan
-                    cita rasa yang cocok untuk berbagai kalangan.
-                </p>
-                <p>
-                    Kami berusaha memberikan pelayanan terbaik kepada pelanggan
-                    serta menyediakan makanan dengan bahan yang berkualitas dan
-                    segar setiap harinya.
-                </p>
+                        <p>
+                            Restoran Selera Nusantara hadir untuk memperkenalkan kekayaan kuliner khas Indonesia. Setiap sajian diolah dengan perpaduan rempah-rempah pilihan yang cocok untuk berbagai selera dan generasi.
+                        </p>
+                        <p>
+                            Kami berkomitmen memberikan pelayanan terbaik, tempat yang nyaman, serta makanan dari bahan-bahan segar berkualitas terbaik setiap harinya.
+                        </p>
 
-                <div class="about-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">15+</div>
-                        <div class="stat-label">Menu Pilihan</div>
+                        <!-- Tabel Statistik Kepercayaan Pelanggan -->
+                        <table class="stats-table">
+                            <tr>
+                                <td class="stat-item-cell">
+                                    <div class="stat-number">25+</div>
+                                    <div class="stat-label">Pilihan Menu</div>
+                                </td>
+                                <td class="stat-item-cell">
+                                    <div class="stat-number">5K+</div>
+                                    <div class="stat-label">Pelanggan Puas</div>
+                                </td>
+                                <td class="stat-item-cell">
+                                    <div class="stat-number">4.9</div>
+                                    <div class="stat-label">Rating Ulasan</div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number">5K+</div>
-                        <div class="stat-label">Pelanggan</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">4.8</div>
-                        <div class="stat-label">Rating</div>
-                    </div>
-                </div>
-            </div>
+                </td>
 
-            <div class="about-image-container">
-                <div class="img-main">🍛</div>
-            </div>
-        </div>
+                <td class="about-col-image">
+                    <div class="about-image-container">
+                        <div class="img-main">🍛</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </section>
 
 
-    <!-- ===== MENU MAKANAN ===== -->
+    <!-- ===== PROMO & PENAWARAN SPESIAL (PENGGUNAAN TABEL PROMOSI UTAMA) ===== -->
+    <section class="section promo-section" id="promo">
+        <div class="promo-box-header">
+            <span class="section-label">Penawaran Eksklusif</span>
+            <h2 class="section-title">Paket Promo Hemat & Promo Spesial</h2>
+            <p class="section-subtitle">Dapatkan penawaran paket hemat rame-rame, diskon harian, hingga voucher cashback menarik untuk santap bersama keluarga dan rekan tercinta.</p>
+        </div>
+
+        <!-- TABEL 1: DAFTAR PAKET PROMO SPESIAL RESTORAN -->
+        <h3 style="font-size: 1.35rem; color: #1a1a2e; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <span>🎉</span> Paket Promo Combo Nusantara
+        </h3>
+        
+        <div class="table-responsive">
+            <table class="data-table promo-table">
+                <thead>
+                    <tr>
+                        <th style="width: 22%;">Nama Paket Promo</th>
+                        <th style="width: 33%;">Komposisi & Menu Termasuk</th>
+                        <th style="width: 14%;">Harga Normal</th>
+                        <th style="width: 14%;">Harga Promo</th>
+                        <th style="width: 10%;">Hemat</th>
+                        <th style="width: 7%; text-align: center;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="promo-name">Paket Kenyang Berdua</div>
+                            <span class="badge-promo">Terlaris</span>
+                        </td>
+                        <td>
+                            <div class="promo-desc">
+                                • 1 Nasi Goreng Spesial<br>
+                                • 1 Mie Goreng Jawa<br>
+                                • 2 Es Teh Manis Segar + 2 Kerupuk Renyah
+                            </div>
+                        </td>
+                        <td>
+                            <span class="price-old">Rp 61.000</span>
+                        </td>
+                        <td>
+                            <span class="price-new">Rp 45.000</span>
+                        </td>
+                        <td>
+                            <span class="badge-discount">Hemat 26%</span>
+                        </td>
+                        <td style="text-align: center;">
+                            <a href="#kontak" class="btn-order-promo">Pesan</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="promo-name">Paket Sultan Ayam Bakar</div>
+                            <span class="badge-promo" style="background: #f39c12;">Rekomendasi</span>
+                        </td>
+                        <td>
+                            <div class="promo-desc">
+                                • 2 Ayam Bakar Madu Spesial<br>
+                                • 2 Nasi Putih Wangi<br>
+                                • 2 Es Jeruk Murni + Lalapan Sambal Terasi
+                            </div>
+                        </td>
+                        <td>
+                            <span class="price-old">Rp 88.000</span>
+                        </td>
+                        <td>
+                            <span class="price-new">Rp 65.000</span>
+                        </td>
+                        <td>
+                            <span class="badge-discount">Hemat 26%</span>
+                        </td>
+                        <td style="text-align: center;">
+                            <a href="#kontak" class="btn-order-promo">Pesan</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="promo-name">Paket Rame-Rame Keluarga</div>
+                            <span class="badge-promo" style="background: #8e44ad;">Porsi 4 Orang</span>
+                        </td>
+                        <td>
+                            <div class="promo-desc">
+                                • 2 Ayam Bakar Madu + 1 Soto Ayam Porsi Besar<br>
+                                • 1 Gado-Gado Spesial Bumbu Kacang<br>
+                                • 4 Nasi Putih + 4 Es Teh Manis
+                            </div>
+                        </td>
+                        <td>
+                            <span class="price-old">Rp 150.000</span>
+                        </td>
+                        <td>
+                            <span class="price-new">Rp 115.000</span>
+                        </td>
+                        <td>
+                            <span class="badge-discount">Hemat 23%</span>
+                        </td>
+                        <td style="text-align: center;">
+                            <a href="#kontak" class="btn-order-promo">Pesan</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="promo-name">Paket Sehat & Segar</div>
+                            <span class="badge-promo" style="background: #27ae60;">Diet Seimbang</span>
+                        </td>
+                        <td>
+                            <div class="promo-desc">
+                                • 1 Porsi Gado-Gado Segar Telur Utuh<br>
+                                • 1 Mangkok Soto Ayam Kuah Bening Gurih<br>
+                                • 1 Es Jeruk Tanpa Pemanis Buatan
+                            </div>
+                        </td>
+                        <td>
+                            <span class="price-old">Rp 48.000</span>
+                        </td>
+                        <td>
+                            <span class="price-new">Rp 37.000</span>
+                        </td>
+                        <td>
+                            <span class="badge-discount">Hemat 23%</span>
+                        </td>
+                        <td style="text-align: center;">
+                            <a href="#kontak" class="btn-order-promo">Pesan</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="promo-name">Paket Nongkrong Sore</div>
+                            <span class="badge-promo" style="background: #2980b9;">14.00 - 18.00</span>
+                        </td>
+                        <td>
+                            <div class="promo-desc">
+                                • 2 Cangkir Kopi Susu Tradisional<br>
+                                • 1 Porsi Pisang Goreng Crispy / Camilan Sore
+                            </div>
+                        </td>
+                        <td>
+                            <span class="price-old">Rp 45.000</span>
+                        </td>
+                        <td>
+                            <span class="price-new">Rp 30.000</span>
+                        </td>
+                        <td>
+                            <span class="badge-discount">Hemat 33%</span>
+                        </td>
+                        <td style="text-align: center;">
+                            <a href="#kontak" class="btn-order-promo">Pesan</a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot class="promo-tfoot">
+                    <tr>
+                        <td colspan="6">
+                            * Syarat & Ketentuan: Promo berlaku untuk makan di tempat (dine-in) dan takeaway. Promo tidak dapat digabungkan dengan diskon membership lainnya.
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+
+        <!-- TABEL 2 & 3: JADWAL DISKON HARIAN & PROGRAM LOYALTY (TABLE SPLIT DUA KOLOM) -->
+        <table class="layout-table promo-split-table" role="presentation">
+            <tr>
+                <td class="promo-split-col-left">
+                    <div class="mini-promo-card">
+                        <h4><span>📅</span> Jadwal Diskon Harian (Weekly Deals)</h4>
+                        <div class="table-responsive" style="margin: 10px 0 0; box-shadow: none;">
+                            <table class="inner-data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Hari</th>
+                                        <th>Nama Program Promo</th>
+                                        <th>Keuntungan</th>
+                                        <th>Kode Kupon</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Senin</strong></td>
+                                        <td>Senin Semangat</td>
+                                        <td>Diskon 20% Semua Nasi Goreng</td>
+                                        <td><span class="badge-code">SENIN20</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Selasa</strong></td>
+                                        <td>Selasa Segar</td>
+                                        <td>Gratis Es Teh tiap beli menu utama</td>
+                                        <td><span class="badge-code">FREETEH</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Rabu</strong></td>
+                                        <td>Rabu Kenyang</td>
+                                        <td>Beli 2 Ayam Bakar Gratis 1 Porsi Gado-Gado</td>
+                                        <td><span class="badge-code">RABUKNYG</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Kamis</strong></td>
+                                        <td>Kamis Berkah</td>
+                                        <td>Diskon 15% Semua Menu Kuah / Soto</td>
+                                        <td><span class="badge-code">SOTOKAMIS</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Jumat - Mgg</strong></td>
+                                        <td>Weekend Fiesta</td>
+                                        <td>Cashback 25% min. belanja 100k</td>
+                                        <td><span class="badge-code">WEEKEND25</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </td>
+
+                <td class="promo-split-col-right">
+                    <div class="mini-promo-card">
+                        <h4><span>👑</span> Member Privilege & Voucher Diskon</h4>
+                        <div class="table-responsive" style="margin: 10px 0 0; box-shadow: none;">
+                            <table class="inner-data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tingkat Member</th>
+                                        <th>Syarat Transaksi</th>
+                                        <th>Benefit Diskon</th>
+                                        <th>Keuntungan Tambahan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong style="color: #7f8c8d;">Silver</strong></td>
+                                        <td>Min. Rp 250.000 / bln</td>
+                                        <td><span class="badge-discount">Diskon 5%</span></td>
+                                        <td>Free Es Teh Manis Ultah</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong style="color: #d4af37;">Gold</strong></td>
+                                        <td>Min. Rp 600.000 / bln</td>
+                                        <td><span class="badge-discount">Diskon 10%</span></td>
+                                        <td>Prioritas Antrean & Reservasi</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong style="color: #2c3e50;">Platinum</strong></td>
+                                        <td>Min. Rp 1.200.000 / bln</td>
+                                        <td><span class="badge-discount">Diskon 15%</span></td>
+                                        <td>Free Dessert Tiap Kunjungan</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mahasiswa / Pelajar</strong></td>
+                                        <td>Tunjukkan Kartu Pelajar</td>
+                                        <td><span class="badge-discount">Diskon 10%</span></td>
+                                        <td>Berlaku setiap Senin - Kamis</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+
+    <!-- ===== MENU MAKANAN (TABLE LAYOUT UNTUK GRID MAKANAN) ===== -->
     <section class="menu-section" id="menu">
         <div class="section" style="padding-top: 80px; padding-bottom: 80px;">
             <span class="section-label">Spesial Kami</span>
-            <h2 class="section-title">Menu Makanan</h2>
-            <p class="section-subtitle">Dibuat dengan cinta dan bahan pilihan terbaik untuk memberikan pengalaman kuliner yang tak terlupakan.</p>
+            <h2 class="section-title">Menu Makanan Pilihan</h2>
+            <p class="section-subtitle">Dibuat dengan cinta dan bahan pilihan terbaik untuk memberikan pengalaman kuliner nusantara yang tak terlupakan.</p>
 
-            <div class="menu-grid">
-
-                <div class="menu-card fade-in">
-                    <div class="menu-card-media">
-                        <video controls poster="nasi goreng spesial.jpg">
-                            <source src="nasi goreng spesial.mp4" type="video/mp4">
-                        </video>
-                        <div class="menu-card-badge">⭐ Best Seller</div>
-                    </div>
-                    <div class="menu-card-body">
-                        <h3>Nasi Goreng Spesial</h3>
-                        <p class="desc">Nasi goreng dengan telur, ayam suwir, dan bumbu rahasia.</p>
-                        <div class="menu-card-footer">
-                            <span class="menu-price">Rp 25.000</span>
-                            <button class="menu-order-btn">Pesan</button>
+            <!-- TATA LETAK KARTU MENU MENGGUNAKAN TABLE LAYOUT (BARIS 1) -->
+            <table class="layout-table menu-layout-table" role="presentation">
+                <tr>
+                    <td>
+                        <div class="menu-card fade-in">
+                            <div class="menu-card-media">
+                                <video controls poster="nasi goreng spesial.jpg">
+                                    <source src="nasi goreng spesial.mp4" type="video/mp4">
+                                </video>
+                                <div class="menu-card-badge">⭐ Best Seller</div>
+                            </div>
+                            <div class="menu-card-body">
+                                <h3>Nasi Goreng Spesial</h3>
+                                <p class="desc">Nasi goreng dengan bumbu rempah pilihan, telur mata sapi, ayam suwir, dan kerupuk gurih.</p>
+                                
+                                <table class="layout-table card-footer-table" role="presentation">
+                                    <tr>
+                                        <td><span class="menu-price">Rp 25.000</span></td>
+                                        <td style="text-align: right;"><button class="menu-order-btn" onclick="pesanMenu('Nasi Goreng Spesial')">Pesan</button></td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </td>
 
-                <div class="menu-card fade-in">
-                    <div class="menu-card-media">
-                        <video controls poster="mie goreng jawa.jpg">
-                            <source src="mie goreng jawa.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="menu-card-body">
-                        <h3>Mie Goreng Jawa</h3>
-                        <p class="desc">Mie goreng khas Jawa dengan sayuran segar dan bumbu manis.</p>
-                        <div class="menu-card-footer">
-                            <span class="menu-price">Rp 22.000</span>
-                            <button class="menu-order-btn">Pesan</button>
+                    <td>
+                        <div class="menu-card fade-in">
+                            <div class="menu-card-media">
+                                <video controls poster="mie goreng jawa.jpg">
+                                    <source src="mie goreng jawa.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="menu-card-body">
+                                <h3>Mie Goreng Jawa</h3>
+                                <p class="desc">Mie kuning kenyal khas Jawa dengan sayuran segar, telur orak-arik, dan bumbu manis gurih.</p>
+                                
+                                <table class="layout-table card-footer-table" role="presentation">
+                                    <tr>
+                                        <td><span class="menu-price">Rp 22.000</span></td>
+                                        <td style="text-align: right;"><button class="menu-order-btn" onclick="pesanMenu('Mie Goreng Jawa')">Pesan</button></td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </td>
 
-                <div class="menu-card fade-in">
-                    <div class="menu-card-media">
-                        <video controls poster="ayam bakar madu.jpg">
-                            <source src="ayam bakar madu.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="menu-card-body">
-                        <h3>Ayam Bakar Madu</h3>
-                        <p class="desc">Ayam bakar dengan olesan madu dan sambal kecap istimewa.</p>
-                        <div class="menu-card-footer">
-                            <span class="menu-price">Rp 30.000</span>
-                            <button class="menu-order-btn">Pesan</button>
+                    <td>
+                        <div class="menu-card fade-in">
+                            <div class="menu-card-media">
+                                <video controls poster="ayam bakar madu.jpg">
+                                    <source src="ayam bakar madu.mp4" type="video/mp4">
+                                </video>
+                                <div class="menu-card-badge">🔥 Favorit</div>
+                            </div>
+                            <div class="menu-card-body">
+                                <h3>Ayam Bakar Madu</h3>
+                                <p class="desc">Potongan ayam empuk dengan olesan madu murni bakar aromatik dan sambal terasi pedas manis.</p>
+                                
+                                <table class="layout-table card-footer-table" role="presentation">
+                                    <tr>
+                                        <td><span class="menu-price">Rp 30.000</span></td>
+                                        <td style="text-align: right;"><button class="menu-order-btn" onclick="pesanMenu('Ayam Bakar Madu')">Pesan</button></td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </td>
+                </tr>
+            </table>
 
-                <div class="menu-card fade-in">
-                    <div class="menu-card-media">
-                        <video controls poster="soto ayam.jpg">
-                            <source src="soto ayam.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="menu-card-body">
-                        <h3>Soto Ayam</h3>
-                        <p class="desc">Kuah kuning gurih dengan ayam suwir, bihun, dan telur.</p>
-                        <div class="menu-card-footer">
-                            <span class="menu-price">Rp 20.000</span>
-                            <button class="menu-order-btn">Pesan</button>
+            <!-- TATA LETAK KARTU MENU MENGGUNAKAN TABLE LAYOUT (BARIS 2) -->
+            <table class="layout-table menu-layout-table" role="presentation">
+                <tr>
+                    <td>
+                        <div class="menu-card fade-in">
+                            <div class="menu-card-media">
+                                <video controls poster="soto ayam.jpg">
+                                    <source src="soto ayam.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="menu-card-body">
+                                <h3>Soto Ayam Lamongan</h3>
+                                <p class="desc">Kuah kuning gurih kaya koya dengan ayam suwir lembut, bihun lembut, dan irisan telur rebus.</p>
+                                
+                                <table class="layout-table card-footer-table" role="presentation">
+                                    <tr>
+                                        <td><span class="menu-price">Rp 20.000</span></td>
+                                        <td style="text-align: right;"><button class="menu-order-btn" onclick="pesanMenu('Soto Ayam Lamongan')">Pesan</button></td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </td>
 
-                <div class="menu-card fade-in">
-                    <div class="menu-card-media">
-                        <video controls poster="gado gado.jpg">
-                            <source src="gado gado.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="menu-card-body">
-                        <h3>Gado-Gado</h3>
-                        <p class="desc">Sayuran segar dengan bumbu kacang khas dan kerupuk renyah.</p>
-                        <div class="menu-card-footer">
-                            <span class="menu-price">Rp 18.000</span>
-                            <button class="menu-order-btn">Pesan</button>
+                    <td>
+                        <div class="menu-card fade-in">
+                            <div class="menu-card-media">
+                                <video controls poster="gado gado.jpg">
+                                    <source src="gado gado.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="menu-card-body">
+                                <h3>Gado-Gado Nusantara</h3>
+                                <p class="desc">Sayuran segar rebus berselimut bumbu kacang medok kental, lontong empuk, telur, dan kerupuk.</p>
+                                
+                                <table class="layout-table card-footer-table" role="presentation">
+                                    <tr>
+                                        <td><span class="menu-price">Rp 18.000</span></td>
+                                        <td style="text-align: right;"><button class="menu-order-btn" onclick="pesanMenu('Gado-Gado Nusantara')">Pesan</button></td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </td>
 
+                    <td>
+                        <!-- Kartu Informasi Tambahan Porsi Nasi & Sambal -->
+                        <div class="menu-card fade-in" style="background: linear-gradient(135deg, #1a1a2e, #16213e); color: white;">
+                            <div class="menu-card-body" style="padding: 32px 24px; text-align: center; justify-content: center;">
+                                <div style="font-size: 3rem; margin-bottom: 12px;">🍚🥢</div>
+                                <h3 style="color: #fff; margin-bottom: 10px;">Pelengkap Hidangan</h3>
+                                <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 20px;">
+                                    Tersedia Nasi Putih Wangi (Rp 5.000), Aneka Sambal Spesial (Rp 4.000), dan Kerupuk Kaleng Renyah (Rp 2.000).
+                                </p>
+                                <a href="#tabel-menu" class="btn-order-promo" style="align-self: center;">Lihat Daftar Lengkap</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+
+            <!-- MENU MINUMAN (TABLE LAYOUT) -->
+            <div style="margin-top: 56px;">
+                <span class="section-label">Penyegar Dahaga</span>
+                <h2 class="section-title">Menu Minuman Segar</h2>
+                <p class="section-subtitle">Pilihan minuman tradisional dan segar untuk menyempurnakan santapan Anda.</p>
+
+                <table class="layout-table drinks-layout-table" role="presentation">
+                    <tr>
+                        <td>
+                            <div class="drink-item fade-in">
+                                <table class="layout-table drink-item-table" role="presentation">
+                                    <tr>
+                                        <td class="drink-icon-cell"><div class="drink-icon">🧊</div></td>
+                                        <td><span class="drink-name">Es Teh Manis</span></td>
+                                        <td class="drink-price">Rp 7.000</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="drink-item fade-in">
+                                <table class="layout-table drink-item-table" role="presentation">
+                                    <tr>
+                                        <td class="drink-icon-cell"><div class="drink-icon">🍊</div></td>
+                                        <td><span class="drink-name">Es Jeruk Peras</span></td>
+                                        <td class="drink-price">Rp 10.000</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="drink-item fade-in">
+                                <table class="layout-table drink-item-table" role="presentation">
+                                    <tr>
+                                        <td class="drink-icon-cell"><div class="drink-icon">☕</div></td>
+                                        <td><span class="drink-name">Kopi Susu Gula Aren</span></td>
+                                        <td class="drink-price">Rp 15.000</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="drink-item fade-in">
+                                <table class="layout-table drink-item-table" role="presentation">
+                                    <tr>
+                                        <td class="drink-icon-cell"><div class="drink-icon">🥥</div></td>
+                                        <td><span class="drink-name">Es Cendol Durian</span></td>
+                                        <td class="drink-price">Rp 16.000</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="drink-item fade-in">
+                                <table class="layout-table drink-item-table" role="presentation">
+                                    <tr>
+                                        <td class="drink-icon-cell"><div class="drink-icon">🍋</div></td>
+                                        <td><span class="drink-name">Lemon Tea Hangat/Dingin</span></td>
+                                        <td class="drink-price">Rp 12.000</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="drink-item fade-in">
+                                <table class="layout-table drink-item-table" role="presentation">
+                                    <tr>
+                                        <td class="drink-icon-cell"><div class="drink-icon">🌿</div></td>
+                                        <td><span class="drink-name">Wedang Jahe Rempah</span></td>
+                                        <td class="drink-price">Rp 12.000</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
 
 
-            <!-- MENU MINUMAN -->
-            <div style="margin-top: 64px;">
-                <span class="section-label">Penyegar</span>
-                <h2 class="section-title">Menu Minuman</h2>
-                <p class="section-subtitle">Pilihan minuman segar untuk menemani hidangan Anda.</p>
+            <!-- TABEL DAFTAR LENGKAP HARGA & MENU RESTORAN -->
+            <div id="tabel-menu" style="margin-top: 56px;">
+                <span class="section-label">Daftar Menu & Harga</span>
+                <h3 style="font-size: 1.5rem; color: #1a1a2e; margin-bottom: 8px;">Katalog Lengkap Restoran Selera Nusantara</h3>
+                <p style="color: #777; font-size: 0.95rem; margin-bottom: 20px;">Tabel rincian menu makanan, minuman, dan status ketersediaan.</p>
 
-                <div class="drinks-list">
-                    <div class="drink-item fade-in">
-                        <div class="drink-info">
-                            <div class="drink-icon">🧊</div>
-                            <span class="drink-name">Es Teh Manis</span>
-                        </div>
-                        <span class="drink-price">Rp 7.000</span>
-                    </div>
-
-                    <div class="drink-item fade-in">
-                        <div class="drink-info">
-                            <div class="drink-icon">🍊</div>
-                            <span class="drink-name">Es Jeruk</span>
-                        </div>
-                        <span class="drink-price">Rp 10.000</span>
-                    </div>
-
-                    <div class="drink-item fade-in">
-                        <div class="drink-info">
-                            <div class="drink-icon">☕</div>
-                            <span class="drink-name">Kopi Susu</span>
-                        </div>
-                        <span class="drink-price">Rp 15.000</span>
-                    </div>
+                <div class="table-responsive">
+                    <table class="data-table menu-catalog-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%;">No</th>
+                                <th style="width: 25%;">Nama Menu</th>
+                                <th style="width: 15%;">Kategori</th>
+                                <th style="width: 30%;">Karakteristik & Cita Rasa</th>
+                                <th style="width: 15%;">Harga</th>
+                                <th style="width: 10%;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><strong>Nasi Goreng Spesial</strong></td>
+                                <td><span class="badge-category">Makanan Utama</span></td>
+                                <td>Gurih berempah, ayam suwir, telur mata sapi, kerupuk</td>
+                                <td><span class="price-new">Rp 25.000</span></td>
+                                <td><span class="badge-promo">Best Seller</span></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><strong>Mie Goreng Jawa</strong></td>
+                                <td><span class="badge-category">Makanan Utama</span></td>
+                                <td>Manis gurih kecap khas Jawa, sawi hijau, telur, acar</td>
+                                <td><span class="price-new">Rp 22.000</span></td>
+                                <td><span class="badge-discount" style="background: #34495e;">Tersedia</span></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><strong>Ayam Bakar Madu</strong></td>
+                                <td><span class="badge-category">Olahan Ayam</span></td>
+                                <td>Manis gurih karamel madu alami dengan sambal terasi</td>
+                                <td><span class="price-new">Rp 30.000</span></td>
+                                <td><span class="badge-promo" style="background:#f39c12;">Favorit</span></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><strong>Soto Ayam Lamongan</strong></td>
+                                <td><span class="badge-category">Menu Kuah</span></td>
+                                <td>Kuah kuning gurih rempah, serbuk koya, bihun, irisan telur</td>
+                                <td><span class="price-new">Rp 20.000</span></td>
+                                <td><span class="badge-discount" style="background: #34495e;">Tersedia</span></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><strong>Gado-Gado Nusantara</strong></td>
+                                <td><span class="badge-category">Sayuran</span></td>
+                                <td>Sayuran kukus segar, lontong, bumbu kacang sangrai medok</td>
+                                <td><span class="price-new">Rp 18.000</span></td>
+                                <td><span class="badge-discount" style="background: #34495e;">Tersedia</span></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td><strong>Es Teh Manis</strong></td>
+                                <td><span class="badge-category">Minuman</span></td>
+                                <td>Teh melati wangi dingin dengan gula asli</td>
+                                <td><span class="price-new">Rp 7.000</span></td>
+                                <td><span class="badge-discount" style="background: #34495e;">Tersedia</span></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td><strong>Es Jeruk Peras</strong></td>
+                                <td><span class="badge-category">Minuman</span></td>
+                                <td>Jeruk peras murni kaya vitamin C menyegarkan</td>
+                                <td><span class="price-new">Rp 10.000</span></td>
+                                <td><span class="badge-discount" style="background: #34495e;">Tersedia</span></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td><strong>Kopi Susu Aren</strong></td>
+                                <td><span class="badge-category">Minuman</span></td>
+                                <td>Kopi robusta nusantara dengan susu creamy dan gula aren</td>
+                                <td><span class="price-new">Rp 15.000</span></td>
+                                <td><span class="badge-promo" style="background:#8e44ad;">Favorit</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
         </div>
     </section>
 
 
-    <!-- ===== GALLERY ===== -->
+    <!-- ===== GALLERY (TABLE LAYOUT DENGAN ROWSPAN & COLSPAN) ===== -->
     <section class="gallery-section" id="gallery">
         <div class="section">
-            <span class="section-label">Galeri</span>
+            <span class="section-label">Galeri Hidangan</span>
             <h2 class="section-title">Sajian Terbaik Kami</h2>
-            <p class="section-subtitle">Setiap hidangan dibuat dengan penuh perhatian dan dedikasi.</p>
+            <p class="section-subtitle">Setiap hidangan dibuat dengan penuh perhatian, ketelitian resep, dan cinta terhadap warisan kuliner tanah air.</p>
 
-            <div class="gallery-grid">
-                <div class="gallery-item fade-in">
-                    <img src="nasi goreng spesial.jpg" alt="Nasi Goreng Spesial">
-                    <span class="gallery-item-label">Nasi Goreng Spesial</span>
-                </div>
-                <div class="gallery-item fade-in">
-                    <img src="mie goreng jawa.jpg" alt="Mie Goreng Jawa">
-                    <span class="gallery-item-label">Mie Goreng Jawa</span>
-                </div>
-                <div class="gallery-item fade-in">
-                    <img src="ayam bakar madu.jpg" alt="Ayam Bakar Madu">
-                    <span class="gallery-item-label">Ayam Bakar Madu</span>
-                </div>
-                <div class="gallery-item fade-in">
-                    <img src="soto ayam.jpg" alt="Soto Ayam">
-                    <span class="gallery-item-label">Soto Ayam</span>
-                </div>
-                <div class="gallery-item fade-in">
-                    <img src="gado gado.jpg" alt="Gado-Gado">
-                    <span class="gallery-item-label">Gado-Gado</span>
-                </div>
-            </div>
+            <!-- TABEL LAYOUT GALERI (MENGGUNAKAN ROWSPAN UNTUK GAMBAR UTAMA) -->
+            <table class="gallery-table-layout" role="presentation">
+                <tr>
+                    <!-- Gambar Utama Memanjang Vertikal dengan rowspan="2" -->
+                    <td rowspan="2" class="gallery-cell-featured">
+                        <div class="gallery-item fade-in">
+                            <img src="nasi goreng spesial.jpg" alt="Nasi Goreng Spesial">
+                            <span class="gallery-item-label">Nasi Goreng Spesial Nusantara (Signature Dish)</span>
+                        </div>
+                    </td>
+                    <td class="gallery-cell-regular">
+                        <div class="gallery-item fade-in">
+                            <img src="mie goreng jawa.jpg" alt="Mie Goreng Jawa">
+                            <span class="gallery-item-label">Mie Goreng Jawa Tradisional</span>
+                        </div>
+                    </td>
+                    <td class="gallery-cell-regular">
+                        <div class="gallery-item fade-in">
+                            <img src="ayam bakar madu.jpg" alt="Ayam Bakar Madu">
+                            <span class="gallery-item-label">Ayam Bakar Madu Istimewa</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="gallery-cell-regular">
+                        <div class="gallery-item fade-in">
+                            <img src="soto ayam.jpg" alt="Soto Ayam">
+                            <span class="gallery-item-label">Soto Ayam Kuah Rempah</span>
+                        </div>
+                    </td>
+                    <td class="gallery-cell-regular">
+                        <div class="gallery-item fade-in">
+                            <img src="gado gado.jpg" alt="Gado-Gado">
+                            <span class="gallery-item-label">Gado-Gado Bumbu Kacang</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </section>
 
 
-    <!-- ===== LOKASI ===== -->
-    <section class="section">
+    <!-- ===== LOKASI (TABLE LAYOUT) ===== -->
+    <section class="section" id="lokasi">
         <span class="section-label">Temukan Kami</span>
         <h2 class="section-title">Lokasi Restoran</h2>
-        <p class="section-subtitle">Kami menunggu kedatangan Anda!</p>
+        <p class="section-subtitle">Kami selalu siap menyambut kedatangan Anda bersama keluarga.</p>
 
         <div class="location-card fade-in">
-            <div class="location-icon">📍</div>
-            <div class="location-details">
-                <h3>Jl. Merpati II No. 10</h3>
-                <p>Tangerang Selatan, Banten, Indonesia</p>
-                <span class="hours">🕐 Buka setiap hari: 10.00 – 22.00 WIB</span>
-            </div>
+            <table class="layout-table location-table" role="presentation">
+                <tr>
+                    <td class="location-icon-cell">
+                        <div class="location-icon">📍</div>
+                    </td>
+                    <td class="location-details-cell">
+                        <div class="location-details">
+                            <h3>Jl. Merpati II No. 10</h3>
+                            <p>Tangerang Selatan, Banten, Indonesia 15413</p>
+                            <span class="hours">🕐 Buka Setiap Hari: 10.00 – 22.00 WIB</span>
+                        </div>
+                    </td>
+                    <td class="location-action-cell">
+                        <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn-maps">Petunjuk Arah ↗</a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </section>
 
 
-    <!-- ===== KONTAK ===== -->
+    <!-- ===== KONTAK & RESERVASI (TABLE LAYOUT) ===== -->
     <section class="contact-section" id="kontak">
         <div class="section">
-            <div class="contact-grid">
+            <table class="layout-table contact-layout-table" role="presentation">
+                <tr>
+                    <!-- Kolom Informasi Kontak -->
+                    <td class="contact-col-info">
+                        <div class="contact-info">
+                            <span class="section-label">Hubungi Kami</span>
+                            <h3>Punya Pertanyaan atau Ingin Reservasi Meja?</h3>
+                            <p>Kami siap membantu Anda untuk reservasi tempat, pemesanan katering, atau informasi paket promo lebih lanjut.</p>
 
-                <div class="contact-info">
-                    <span class="section-label">Hubungi Kami</span>
-                    <h3>Punya Pertanyaan?<br>Jangan Ragu untuk Menghubungi.</h3>
-                    <p>Kami siap membantu Anda untuk reservasi, pemesanan, atau informasi lainnya.</p>
-
-                    <div class="contact-item">
-                        <div class="contact-item-icon">📞</div>
-                        <div class="contact-item-text">
-                            <div class="label">Telepon</div>
-                            <div class="value">0812-3456-7890</div>
+                            <!-- Tabel Daftar Saluran Kontak -->
+                            <table class="layout-table contact-items-table" role="presentation">
+                                <tr>
+                                    <td class="contact-item-icon-cell">
+                                        <div class="contact-item-icon">📞</div>
+                                    </td>
+                                    <td>
+                                        <div class="contact-item-text">
+                                            <div class="label">Telepon / WhatsApp</div>
+                                            <div class="value">0812-3456-7890</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="contact-item-icon-cell">
+                                        <div class="contact-item-icon">✉️</div>
+                                    </td>
+                                    <td>
+                                        <div class="contact-item-text">
+                                            <div class="label">Email Resmi</div>
+                                            <div class="value">restoran@seleranusantara.com</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="contact-item-icon-cell">
+                                        <div class="contact-item-icon">📍</div>
+                                    </td>
+                                    <td>
+                                        <div class="contact-item-text">
+                                            <div class="label">Alamat Restoran</div>
+                                            <div class="value">Jl. Merpati II No. 10, Tangerang Selatan</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
-                    </div>
+                    </td>
 
-                    <div class="contact-item">
-                        <div class="contact-item-icon">✉️</div>
-                        <div class="contact-item-text">
-                            <div class="label">Email</div>
-                            <div class="value">restoran@seleranusantara.com</div>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-item-icon">📍</div>
-                        <div class="contact-item-text">
-                            <div class="label">Alamat</div>
-                            <div class="value">Jl. Merpati II No. 10, Tangerang Selatan</div>
-                        </div>
-                    </div>
-                </div>
-
-                <form class="contact-form" onsubmit="event.preventDefault(); alert('Pesan berhasil dikirim! Terima kasih.');">
-                    <div class="form-group">
-                        <label for="name">Nama Lengkap</label>
-                        <input type="text" id="name" placeholder="Masukkan nama lengkap Anda" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="Masukkan email Anda" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Pesan</label>
-                        <textarea id="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Kirim Pesan →</button>
-                </form>
-
-            </div>
+                    <!-- Kolom Formulir Pemesanan & Pesan (Table Layout) -->
+                    <td class="contact-col-form">
+                        <form class="contact-form" onsubmit="handleFormSubmit(event)">
+                            <table class="layout-table form-layout-table" role="presentation">
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label for="name">Nama Lengkap</label>
+                                            <input type="text" id="name" placeholder="Masukkan nama lengkap Anda" required>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label for="email">Alamat Email / No. WhatsApp</label>
+                                            <input type="text" id="email" placeholder="contoh@email.com / 0812xxxx" required>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label for="promoSelect">Pilihan Paket Promo / Topik (Opsional)</label>
+                                            <select id="promoSelect">
+                                                <option value="">-- Pilih Paket Promo / Pertanyaan --</option>
+                                                <option value="Paket Kenyang Berdua">Paket Kenyang Berdua (Rp 45.000)</option>
+                                                <option value="Paket Sultan Ayam Bakar">Paket Sultan Ayam Bakar (Rp 65.000)</option>
+                                                <option value="Paket Rame-Rame Keluarga">Paket Rame-Rame Keluarga (Rp 115.000)</option>
+                                                <option value="Paket Sehat & Segar">Paket Sehat & Segar (Rp 37.000)</option>
+                                                <option value="Paket Nongkrong Sore">Paket Nongkrong Sore (Rp 30.000)</option>
+                                                <option value="Reservasi Meja Acara">Reservasi Meja & Acara Khusus</option>
+                                                <option value="Pertanyaan Umum">Pertanyaan Umum Lainnya</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label for="message">Pesan / Detail Permintaan</label>
+                                            <textarea id="message" placeholder="Tuliskan tanggal reservasi, jumlah orang, atau detail pesanan promo Anda..." required></textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button type="submit" class="submit-btn">Kirim Pesan & Konfirmasi →</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </td>
+                </tr>
+            </table>
         </div>
     </section>
 
 
-    <!-- ===== FOOTER ===== -->
+    <!-- ===== FOOTER (TABLE LAYOUT) ===== -->
     <footer class="footer">
         <div class="footer-inner">
-            <div class="footer-brand">
-                <h3>Selera Nusantara</h3>
-                <p>Menyajikan kelezatan kuliner khas Indonesia dengan bahan berkualitas dan harga terjangkau sejak tahun 2020.</p>
-            </div>
+            <table class="layout-table footer-layout-table" role="presentation">
+                <tr>
+                    <!-- Kolom Brand -->
+                    <td class="footer-col-brand">
+                        <div class="footer-brand">
+                            <h3>Selera Nusantara</h3>
+                            <p>Menyajikan kelezatan kuliner khas Indonesia dengan bahan berkualitas tinggi, keaslian resep tradisional, dan suasana nyaman untuk seluruh keluarga sejak tahun 2020.</p>
+                        </div>
+                    </td>
 
-            <div class="footer-links">
-                <h4>Navigasi</h4>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">Tentang</a></li>
-                    <li><a href="#menu">Menu</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#kontak">Kontak</a></li>
-                </ul>
-            </div>
+                    <!-- Kolom Navigasi -->
+                    <td class="footer-col-links">
+                        <div class="footer-links">
+                            <h4>Navigasi Cepat</h4>
+                            <ul>
+                                <li><a href="#home">Home</a></li>
+                                <li><a href="#about">Tentang Kami</a></li>
+                                <li><a href="#promo">Paket Promo</a></li>
+                                <li><a href="#menu">Daftar Menu</a></li>
+                                <li><a href="#gallery">Galeri</a></li>
+                                <li><a href="#kontak">Kontak & Reservasi</a></li>
+                            </ul>
+                        </div>
+                    </td>
 
-            <div class="footer-links">
-                <h4>Jam Operasional</h4>
-                <ul>
-                    <li><a href="#">Senin – Jumat: 10.00 – 22.00</a></li>
-                    <li><a href="#">Sabtu – Minggu: 09.00 – 23.00</a></li>
-                </ul>
-            </div>
-        </div>
+                    <!-- Kolom Jam Operasional dengan Tabel -->
+                    <td class="footer-col-hours">
+                        <div class="footer-links">
+                            <h4>Jam Operasional</h4>
+                            <table class="layout-table footer-hours-table" role="presentation">
+                                <tr>
+                                    <td class="day-col">Senin – Kamis</td>
+                                    <td>: 10.00 – 22.00 WIB</td>
+                                </tr>
+                                <tr>
+                                    <td class="day-col">Jumat</td>
+                                    <td>: 13.00 – 22.00 WIB</td>
+                                </tr>
+                                <tr>
+                                    <td class="day-col">Sabtu – Minggu</td>
+                                    <td>: 09.00 – 23.00 WIB</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
 
-        <div class="footer-bottom">
-            <p>&copy; 2026 Restoran Selera Nusantara. All Rights Reserved.</p>
+            <!-- Baris Hak Cipta (Footer Bottom Table) -->
+            <table class="layout-table footer-bottom-table" role="presentation">
+                <tr>
+                    <td style="text-align: center;">
+                        <p>&copy; 2026 Restoran Selera Nusantara. All Rights Reserved. Tata letak dikelola dengan optimalisasi elemen tabel HTML.</p>
+                    </td>
+                </tr>
+            </table>
         </div>
     </footer>
 
@@ -1263,11 +2413,34 @@
 
         // Mobile menu toggle
         function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
+            const navLinksCell = document.getElementById('navLinksCell');
+            navLinksCell.classList.toggle('active');
         }
 
         function closeMenu() {
-            document.getElementById('navLinks').classList.remove('active');
+            const navLinksCell = document.getElementById('navLinksCell');
+            navLinksCell.classList.remove('active');
+        }
+
+        // Pesan menu helper
+        function pesanMenu(namaMenu) {
+            const promoSelect = document.getElementById('promoSelect');
+            const messageInput = document.getElementById('message');
+            
+            // Redirect ke form kontak
+            window.location.hash = '#kontak';
+            if (messageInput) {
+                messageInput.value = `Halo, saya ingin memesan menu: ${namaMenu}. Mohon info ketersediaan dan total pembayarannya. Terima kasih.`;
+                messageInput.focus();
+            }
+        }
+
+        // Form submit handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            alert(`Terima kasih Bapak/Ibu ${name}! Pesanan/reservasi Anda berhasil dikirim ke tim Selera Nusantara. Kami akan segera menghubungi Anda.`);
+            e.target.reset();
         }
 
         // Scroll reveal animation
@@ -1276,13 +2449,13 @@
                 if (entry.isIntersecting) {
                     setTimeout(() => {
                         entry.target.classList.add('visible');
-                    }, index * 100);
+                    }, index * 90);
                     observer.unobserve(entry.target);
                 }
             });
         }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.08,
+            rootMargin: '0px 0px -40px 0px'
         });
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
